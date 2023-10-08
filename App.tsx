@@ -9,20 +9,20 @@
  */
 
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 import { AppContainer } from './app/AppContainer';
-import store, { persistor } from './app/features';
+import store from './app/features';
 
 const App: React.FC = () => (
-  <SafeAreaProvider>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <AppContainer />
-      </PersistGate>
-    </Provider>
-  </SafeAreaProvider>
+  // <SafeAreaProvider>
+  <Provider store={store}>
+    {/*<PersistGate persistor={persistor}>*/}
+    <AppContainer />
+    {/*</PersistGate>*/}
+  </Provider>
+  // </SafeAreaProvider>
 );
 
 export default App;
