@@ -1,28 +1,28 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { DriversRSPT, RootState } from 'types';
-import { changeUserInfo } from './slice';
-import cloneDeep from 'lodash/cloneDeep';
+import { changeDriversInfo } from '../drivers/slice';
+import { RootState, AsyncStatus } from 'types';
 
-export const addFavorite = createAsyncThunk(
-  'user/ADD_FAVORITE',
-  (payload: DriversRSPT, { getState, dispatch }) => {
-    const favorites = (getState() as RootState).user.favorites;
-
-    if (favorites.some((I: DriversRSPT) => payload.driverId === I.driverId)) {
-      // eslint-disable-next-line no-console
-      console.log('test');
-    } else {
-      const newDriver = cloneDeep(payload);
-      newDriver.isFavorite = true;
-
-      dispatch(changeUserInfo({ key: 'favorites', value: [...favorites, newDriver] }));
-    }
-  },
-);
+export const delay = (time: number): Promise<boolean> => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};
 
 export const deleteFavorite = createAsyncThunk(
   'user/DELETE_FAVORITE',
-  (payload: string, { dispatch }) => {
-    return dispatch(changeUserInfo({ key: 'value', value: payload }));
+  async (payload: string, { dispatch, fulfillWithValue }) => {
+    await delay(2000);
+    dispatch(changeDriversInfo({ key: 'value', value: payload }));
+    return fulfillWithValue(AsyncStatus.SUCCESS);
+  },
+  {
+    condition: (_, { getState }) => {
+      const user = (getState() as RootState).user;
+      if (user.deleteFavoriteRequestStatus === AsyncStatus.LOADING) {
+        return false;
+      }
+    },
   },
 );

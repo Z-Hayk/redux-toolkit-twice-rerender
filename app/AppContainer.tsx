@@ -6,7 +6,7 @@ import { HomeScreens } from 'navigation';
 import { RootState } from './types';
 
 export const AppContainer: FunctionComponent = () => {
-  const value = useSelector((state: RootState) => state.user.value);
+  const value = useSelector((state: RootState) => state.drivers.value);
   // eslint-disable-next-line no-console
   console.log(value);
 

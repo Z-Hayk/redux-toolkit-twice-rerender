@@ -9,6 +9,8 @@ import * as DriversActions from './actions';
 import { AsyncStatus, DriversRSPT } from 'types';
 
 const initialState: DriversTypes = {
+  value: '',
+
   data: [],
   offset: 0,
 

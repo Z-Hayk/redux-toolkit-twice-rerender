@@ -1,25 +1,52 @@
-import React, { FunctionComponent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { TextInput, StyleSheet } from 'react-native';
+import React, { FunctionComponent, Fragment, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { deleteFavorite } from 'features/user/slice';
-import { RootState, Any } from 'types';
+import { Any, AsyncStatus, RootState } from 'types';
 
 export const HomeScreen: FunctionComponent = () => {
+  const [searchText, setSearchText] = useState('');
   const dispatch = useDispatch() as Any;
-  const value = useSelector((state: RootState) => state.user.value);
+  const loader = useSelector((state: RootState) => state.user.deleteFavoriteRequestStatus);
 
   return (
-    <TextInput
-      value={value}
-      style={styles.textInput}
-      onChangeText={text => dispatch(deleteFavorite(text))}
-    />
+    <Fragment>
+      <TextInput value={searchText} style={styles.textInput} onChangeText={setSearchText} />
+
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.touchableOpacity}
+        onPress={() => dispatch(deleteFavorite(searchText))}
+      >
+        {loader === AsyncStatus.LOADING ? (
+          <Text style={[styles.text, styles.loader]}>Loading</Text>
+        ) : (
+          <Text style={styles.text}>Send</Text>
+        )}
+      </TouchableOpacity>
+    </Fragment>
   );
 };
 
 const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
+    height: 50,
+    fontSize: 30,
     borderColor: 'black',
+  },
+  touchableOpacity: {
+    justifyContent: 'center',
+    marginTop: 200,
+    backgroundColor: 'green',
+    height: 50,
+    width: '100%',
+  },
+  text: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  loader: {
+    color: 'red',
   },
 });

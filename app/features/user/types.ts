@@ -1,9 +1,10 @@
-import { DriversRSPT } from 'types';
+import { DriversRSPT, AsyncStatus } from 'types';
 
 export interface UserTypes {
   initialScreen: 'Auth' | 'Home';
-  value: string;
   favorites: DriversRSPT[];
+
+  deleteFavoriteRequestStatus: AsyncStatus;
 }
 
 export interface ChangeUserInfoProps {

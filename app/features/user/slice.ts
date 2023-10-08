@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserTypes, ChangeUserInfoProps } from './types';
-import { addFavorite, deleteFavorite } from './actions';
+import { ChangeUserInfoProps, UserTypes } from './types';
+import { deleteFavorite } from './actions';
+import { AsyncStatus } from 'types';
 
 const initialState: UserTypes = {
   initialScreen: 'Auth',
-  value: '',
   favorites: [],
+
+  deleteFavoriteRequestStatus: AsyncStatus.NONE,
 };
 
 const userSlice = createSlice({
@@ -21,8 +23,32 @@ const userSlice = createSlice({
       [payload.key]: payload.value,
     }),
   },
+
+  extraReducers: builder => {
+    builder.addCase(
+      deleteFavorite.pending.type,
+      (state: UserTypes): UserTypes => ({
+        ...state,
+        deleteFavoriteRequestStatus: AsyncStatus.LOADING,
+      }),
+    );
+    builder.addCase(
+      deleteFavorite.fulfilled.type,
+      (state: UserTypes, { payload }: PayloadAction<AsyncStatus>): UserTypes => ({
+        ...state,
+        deleteFavoriteRequestStatus: payload,
+      }),
+    );
+    builder.addCase(
+      deleteFavorite.rejected.type,
+      (state: UserTypes): UserTypes => ({
+        ...state,
+        deleteFavoriteRequestStatus: AsyncStatus.FAIL,
+      }),
+    );
+  },
 });
 
-export { addFavorite, deleteFavorite };
+export { deleteFavorite };
 export const { setUserInfo, changeUserInfo } = userSlice.actions;
 export const userReducer = userSlice.reducer;

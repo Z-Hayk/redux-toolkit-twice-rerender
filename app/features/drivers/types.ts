@@ -1,6 +1,8 @@
 import { AsyncStatus, DriversRSPT } from 'types';
 
 export interface DriversTypes {
+  value: string;
+
   data: DriversRSPT[];
   offset: number;
 
@@ -14,7 +16,7 @@ export interface DriversTypes {
 
 export interface ChangeDriversInfoProps {
   key: keyof DriversTypes;
-  value: DriversRSPT[];
+  value: DriversRSPT[] | string;
 }
 
 export interface GetDriversProps {
