@@ -2,10 +2,16 @@
 import React from 'react';
 import { ImageSourcePropType, RefreshControlProps as RefreshControlPropsBase } from 'react-native';
 
+export enum AsyncStatus {
+  NONE,
+  LOADING,
+  SUCCESS,
+  FAIL,
+}
+
 export * from './rootState';
 export * from './responseData';
 export * from './requestData';
-export * from './enums';
 
 export type ReactChildren = { children?: React.ReactNode };
 export type Any = any;

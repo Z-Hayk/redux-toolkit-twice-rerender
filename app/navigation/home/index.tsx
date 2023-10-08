@@ -15,9 +15,7 @@ const options = {
 const BottomTab = createBottomTabNavigator();
 const BottomTabNavigator = (): React.ReactElement => {
   return (
-    <BottomTab.Navigator
-      initialRouteName="HomeScreen"
-    >
+    <BottomTab.Navigator initialRouteName="HomeScreen">
       <BottomTab.Screen name="HomeScreen" component={HomeScreen} />
       <BottomTab.Screen name="FavoritesScreen" component={FavoritesScreen} />
     </BottomTab.Navigator>

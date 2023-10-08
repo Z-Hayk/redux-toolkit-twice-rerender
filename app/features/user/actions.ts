@@ -1,15 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { DriversRSPT } from 'types';
+import { DriversRSPT, RootState } from 'types';
 import { changeUserInfo } from './slice';
 import cloneDeep from 'lodash/cloneDeep';
-import { getStateHandler } from 'utils';
 
 export const addFavorite = createAsyncThunk(
   'user/ADD_FAVORITE',
   (payload: DriversRSPT, { getState, dispatch }) => {
-    const favorites = getStateHandler(getState).user.favorites;
+    const favorites = (getState() as RootState).user.favorites;
 
     if (favorites.some((I: DriversRSPT) => payload.driverId === I.driverId)) {
+      // eslint-disable-next-line no-console
+      console.log('test');
     } else {
       const newDriver = cloneDeep(payload);
       newDriver.isFavorite = true;
@@ -21,7 +22,7 @@ export const addFavorite = createAsyncThunk(
 
 export const deleteFavorite = createAsyncThunk(
   'user/DELETE_FAVORITE',
-  (payload: string, { getState, dispatch }) => {
+  (payload: string, { dispatch }) => {
     return dispatch(changeUserInfo({ key: 'value', value: payload }));
   },
 );

@@ -7,6 +7,7 @@ import { RootState } from './types';
 
 export const AppContainer: FunctionComponent = () => {
   const value = useSelector((state: RootState) => state.user.value);
+  // eslint-disable-next-line no-console
   console.log(value);
 
   return (

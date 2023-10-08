@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserTypes, ChangeUserInfoProps } from './types';
-import * as UserActions from './actions';
+import { addFavorite, deleteFavorite } from './actions';
 
 const initialState: UserTypes = {
   initialScreen: 'Auth',
@@ -23,6 +23,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { addFavorite, deleteFavorite } = UserActions;
+export { addFavorite, deleteFavorite };
 export const { setUserInfo, changeUserInfo } = userSlice.actions;
 export const userReducer = userSlice.reducer;
