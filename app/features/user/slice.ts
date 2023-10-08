@@ -25,27 +25,15 @@ const userSlice = createSlice({
   },
 
   extraReducers: builder => {
-    builder.addCase(
-      deleteFavorite.pending.type,
-      (state: UserTypes): UserTypes => ({
-        ...state,
-        deleteFavoriteRequestStatus: AsyncStatus.LOADING,
-      }),
-    );
-    builder.addCase(
-      deleteFavorite.fulfilled.type,
-      (state: UserTypes, { payload }: PayloadAction<AsyncStatus>): UserTypes => ({
-        ...state,
-        deleteFavoriteRequestStatus: payload,
-      }),
-    );
-    builder.addCase(
-      deleteFavorite.rejected.type,
-      (state: UserTypes): UserTypes => ({
-        ...state,
-        deleteFavoriteRequestStatus: AsyncStatus.FAIL,
-      }),
-    );
+    builder.addCase(deleteFavorite.pending, (state: UserTypes) => {
+      state.deleteFavoriteRequestStatus = AsyncStatus.LOADING;
+    });
+    builder.addCase(deleteFavorite.fulfilled, (state: UserTypes, { payload }) => {
+      state.deleteFavoriteRequestStatus = payload;
+    });
+    builder.addCase(deleteFavorite.rejected, (state: UserTypes) => {
+      state.deleteFavoriteRequestStatus = AsyncStatus.FAIL;
+    });
   },
 });
 

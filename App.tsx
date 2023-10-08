@@ -19,9 +19,7 @@ const App: React.FC = () => (
   <SafeAreaProvider>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <React.StrictMode>
-          <AppContainer />
-        </React.StrictMode>
+        <AppContainer />
       </PersistGate>
     </Provider>
   </SafeAreaProvider>
