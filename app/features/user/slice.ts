@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ChangeUserInfoProps, UserTypes } from './types';
 import { deleteFavorite } from './actions';
-import { AsyncStatus } from 'types';
+import { Any, AsyncStatus } from 'types';
 
 const initialState: UserTypes = {
   initialScreen: 'Auth',
@@ -29,7 +29,7 @@ const userSlice = createSlice({
       state.deleteFavoriteRequestStatus = AsyncStatus.LOADING;
     });
     builder.addCase(deleteFavorite.fulfilled, (state: UserTypes, { payload }) => {
-      state.deleteFavoriteRequestStatus = payload;
+      (state.deleteFavoriteRequestStatus as Any) = payload;
     });
     builder.addCase(deleteFavorite.rejected, (state: UserTypes) => {
       state.deleteFavoriteRequestStatus = AsyncStatus.FAIL;
