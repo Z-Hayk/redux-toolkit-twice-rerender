@@ -5,5 +5,3 @@ import rootReducer from './rootReducer';
 const index = createStore(rootReducer, applyMiddleware(thunk));
 
 export default index;
-export const { dispatch } = index;
-export const { getState } = index;

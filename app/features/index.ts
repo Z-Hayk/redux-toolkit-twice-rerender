@@ -13,7 +13,3 @@ export const index = configureStore({
 });
 
 export default index;
-export const { dispatch } = index;
-export const { getState } = index;
-// export const persistor = persistStore(index);
-// persistor.purge();
