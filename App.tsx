@@ -9,21 +9,15 @@
  */
 
 import React from 'react';
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-// import { PersistGate } from 'redux-persist/integration/react';
 import { AppContainer } from './app/AppContainer';
-// import store from './app/features';
+// import store from './app/features'; // FOR REDUX TOOLKIT
 import store from './app/store';
 
 const App: React.FC = () => (
-  // <SafeAreaProvider>
   <Provider store={store}>
-    {/*<PersistGate persistor={persistor}>*/}
     <AppContainer />
-    {/*</PersistGate>*/}
   </Provider>
-  // </SafeAreaProvider>
 );
 
 export default App;

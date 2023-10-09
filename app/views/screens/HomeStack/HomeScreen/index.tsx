@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
-// import { deleteFavorite } from 'features/user/slice'; // for tollkit
+// import { deleteFavorite } from 'features/user/slice'; // FOR REDUX TOOLKIT
 import { deleteFavorite } from 'store/user/actions';
 import { Any, AsyncStatus, RootState } from 'types';
 
