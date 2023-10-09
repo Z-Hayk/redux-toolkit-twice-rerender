@@ -13,7 +13,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 // import { PersistGate } from 'redux-persist/integration/react';
 import { AppContainer } from './app/AppContainer';
-import store from './app/features';
+// import store from './app/features';
+import store from './app/store';
 
 const App: React.FC = () => (
   // <SafeAreaProvider>

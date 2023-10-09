@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { changeDriversInfo } from '../drivers/slice';
-import { batch } from 'react-redux';
 import { RootState, AsyncStatus } from 'types';
 
 export const delay = (time: number): Promise<boolean> => {
@@ -16,13 +15,12 @@ export const deleteFavorite = createAsyncThunk(
   async (payload: string, { dispatch, fulfillWithValue }) => {
     try {
       await delay(2000);
-      batch(() => {
-        dispatch(changeDriversInfo({ key: 'value', value: payload }));
-        return fulfillWithValue(AsyncStatus.SUCCESS);
-      });
+      return fulfillWithValue(AsyncStatus.SUCCESS);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(e);
+    } finally {
+      dispatch(changeDriversInfo({ key: 'value', value: payload }));
     }
   },
   {
